@@ -2,25 +2,13 @@
 The project runs wiki.js (DocOps).
 
 
-## About the project
----
-
-Uses the following micro service applications:
-
--   App wiki.js
--   PostgreSQL
--   Elasticsearch
--   Prometeus Exporters
--   App Backup
-
-
 ## Pre-deployment preparation
 
 ---
 
 Before deploying the project, install Docker, Docker Compose latest versions.
 
-Change vm.max_map_count
+Change ```vm.max_map_count```
 
 ```bash
 sysctl -w vm.max_map_count=262144
@@ -52,14 +40,14 @@ cp ./.env_template ./.env
 
 3. Run the project 
 
-Production
+**Production**
 
 ```bash
 docker-compose -f docker-compose_cloud_DB up -d
 
 ```
 
-Test
+**Test**
 
 ```bash
 docker-compose -f docker-compose_test.yaml up -d
@@ -68,7 +56,7 @@ docker-compose -f docker-compose_test.yaml up -d
 
 4. After a couple of minutes, the service will start.
 
-5. Update
+5. **Update**
 ```
 docker-compose down
 docker-compose pull wiki
