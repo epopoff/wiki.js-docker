@@ -68,6 +68,13 @@ docker-compose -f docker-compose_test.yaml up -d
 
 4. After a couple of minutes, the service will start.
 
+5. Update
+```
+docker-compose down
+docker-compose pull wiki
+docker-compose up -d
+```
+
 
 ### Useful links
 
