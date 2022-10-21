@@ -72,7 +72,7 @@ docker-compose -f docker-compose_test.yaml up -d
 ```
 docker-compose down
 docker-compose pull wiki
-docker-compose up -d
+docker-compose up -d --force-recreate
 ```
 
 
