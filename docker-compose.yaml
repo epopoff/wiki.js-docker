@@ -19,20 +19,23 @@ services:
     volumes:
       - wiki_temp:/wiki/data
       - /etc/localtime:/etc/localtime:ro
+    
+    # Label for Traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.wiki.rule=Host(`wiki.yc.cloudtechport.com`)
+      - traefik.http.routers.wiki.entrypoints=https
+      - traefik.http.routers.wiki.tls=true
+      - traefik.http.routers.wiki.tls.certresolver=letsEncrypt
+      - traefik.http.services.wiki.loadbalancer.server.port=3000
+      - traefik.docker.network=web
 
-  # elasticsearch:
-  #   image: bitnami/elasticsearch:${elasticsearch_ver:-7.17.5}
-  #   environment:
-  #     TZ: Europe/Moscow
-  #     MAX_LOCKED_MEMORY: ${MAX_LOCKED_MEMORY}
-  #     ELASTICSEARCH_NODE_NAME: ${ELASTICSEARCH_NODE_NAME}
-  #     ELASTICSEARCH_CLUSTER_HOSTS: ${ELASTICSEARCH_CLUSTER_HOSTS}
-  #     ELASTICSEARCH_CLUSTER_NAME: ${ELASTICSEARCH_CLUSTER_NAME}
-  #     ELASTICSEARCH_HEAP_SIZE: ${ELASTICSEARCH_HEAP_SIZE}
-  #     ELASTICSEARCH_MINIMUM_MASTER_NODES: ${ELASTICSEARCH_MINIMUM_MASTER_NODES}
-  #   volumes:
-  #     - elasticsearch-data:/bitnami/elasticsearch/data
+    networks:
+      - web # Traefik network
 
 volumes:
-  # elasticsearch-data:
   wiki_temp:
+
+networks:
+  web:
+    external: true
